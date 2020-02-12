@@ -38,5 +38,5 @@ echo $highlighter->getWholeFile($fileContent);
 ------
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/jakub-onderka/php-console-highlighter.svg)](https://packagist.org/packages/jakub-onderka/php-console-highlighter)
-[![Build Status](https://travis-ci.org/JakubOnderka/PHP-Console-Highlighter.svg?branch=master)](https://travis-ci.org/JakubOnderka/PHP-Console-Highlighter)
+[![Build Status](https://travis-ci.org/php-parallel-lint/PHP-Console-Highlighter.svg?branch=master)](https://travis-ci.org/php-parallel-lint/PHP-Console-Highlighter)
 [![License](https://poser.pugx.org/jakub-onderka/php-console-highlighter/license.svg)](https://packagist.org/packages/jakub-onderka/php-console-highlighter)
