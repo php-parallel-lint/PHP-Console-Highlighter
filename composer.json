@@ -1,5 +1,5 @@
 {
-    "name": "jakub-onderka/php-console-highlighter",
+    "name": "php-parallel-lint/php-console-highlighter",
     "description": "Highlight PHP code in terminal",
     "type": "library",
     "license": "MIT",
