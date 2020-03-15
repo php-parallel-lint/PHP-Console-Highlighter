@@ -24,5 +24,8 @@
         "php-parallel-lint/php-var-dump-check": "~0.1",
         "squizlabs/php_codesniffer": "~1.5",
         "php-parallel-lint/php-code-style": "~1.0"
+    },
+    "replace": {
+        "jakub-onderka/php-console-highlighter": "*"
     }
 }
