@@ -10,15 +10,9 @@ Example
 Install
 -------
 
-Just create a `composer.json` file and run the `php composer.phar install` command to install it:
+Just run the following command to install it:
 
-```json
-{
-    "require": {
-        "jakub-onderka/php-console-highlighter": "0.*"
-    }
-}
-```
+    composer require --dev php-parallel-lint/php-console-highlighter
 
 Usage
 -------
