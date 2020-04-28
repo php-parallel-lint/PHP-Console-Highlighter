@@ -12,7 +12,7 @@ Install
 
 Just run the following command to install it:
 
-    composer require --dev php-parallel-lint/php-console-highlighter
+    composer require --dev php-parallel-lint/php-console-highlighter:"0.*"
 
 Usage
 -------
