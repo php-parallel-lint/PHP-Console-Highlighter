@@ -1,7 +1,9 @@
 <?php
 namespace JakubOnderka\PhpConsoleHighlighter;
 
-class HighlighterTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class HighlighterTest extends TestCase
 {
     /** @var Highlighter */
     private $uut;

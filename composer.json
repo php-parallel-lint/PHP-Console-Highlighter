@@ -19,7 +19,7 @@
         "php-parallel-lint/php-console-color": "~0.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "^4.8.36",
         "php-parallel-lint/php-parallel-lint": "~1.0",
         "php-parallel-lint/php-var-dump-check": "~0.1",
         "squizlabs/php_codesniffer": "~1.5",
