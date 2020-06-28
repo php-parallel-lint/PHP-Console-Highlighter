@@ -35,6 +35,9 @@ class HighlighterTest extends TestCase
     protected function compare($original, $expected)
     {
         $output = $this->uut->getWholeFile($original);
+        // Allow unit tests to succeed on non-*nix systems.
+        $output = str_replace(array("\r\n", "\r"), "\n", $output);
+
         $this->assertSame($expected, $output);
     }
 
