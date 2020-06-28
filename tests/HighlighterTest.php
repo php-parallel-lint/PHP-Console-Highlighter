@@ -35,7 +35,7 @@ class HighlighterTest extends TestCase
     protected function compare($original, $expected)
     {
         $output = $this->uut->getWholeFile($original);
-        $this->assertEquals($expected, $output);
+        $this->assertSame($expected, $output);
     }
 
     public function testVariable()
