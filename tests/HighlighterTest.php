@@ -27,7 +27,10 @@ class HighlighterTest extends TestCase
         return $mock;
     }
 
-    protected function setUp()
+    /**
+     * @before
+     */
+    protected function setUpHighlighter()
     {
         $this->uut = new Highlighter($this->getConsoleColorMock());
     }
