@@ -24,7 +24,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - composer install --no-interaction --prefer-source
+  - composer install --no-interaction
 
 script:
   - ant
