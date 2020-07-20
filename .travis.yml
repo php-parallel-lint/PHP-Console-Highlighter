@@ -1,9 +1,13 @@
-dist: trusty
+os: linux
+dist: xenial
 language: php
 
+addons:
+  apt:
+    packages:
+      - ant
+
 php:
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
   - 7.1
@@ -14,6 +18,11 @@ php:
 
 jobs:
   fast_finish: true
+  include:
+    - php: 5.4
+      dist: trusty
+    - php: 5.5
+      dist: trusty
   allow_failures:
     # Allow failures for unstable builds.
     - php: "nightly"
