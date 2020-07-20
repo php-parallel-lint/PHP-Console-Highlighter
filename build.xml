@@ -64,7 +64,7 @@
     <target name="phpunit" depends="prepare" description="PHP unit">
         <delete file="${basedir}/build/logs/phpunit.xml" quiet="true" />
 
-        <exec executable="${phpunit}">
+        <exec executable="${phpunit}" failonerror="true">
             <arg line='--configuration ${basedir}/phpunit.xml.dist' />
             <arg line='-d memory_limit=256M' />
             <arg line='--log-junit "${basedir}/build/logs/phpunit.xml"' />
