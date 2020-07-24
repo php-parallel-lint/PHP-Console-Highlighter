@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+-  Composer: update allowed version for various dependencies from [@jrfnl](https://github.com/jrfnl).
+
 ### Internal
 
 - Added EOF (end of file) for some PHP files from [@peter279k](https://github.com/peter279k).
