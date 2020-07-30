@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added EOF (end of file) for some PHP files from [@peter279k](https://github.com/peter279k).
 - To be compatible with future PHPUnit version, using the ^4.8.36 version at least from [@peter279k](https://github.com/peter279k).
 - Changed namespace to PHPunit\Framework\TestCase class namesapce from [@peter279k](https://github.com/peter279k).
+- Travis: improve caching between builds [#14](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/14) from [@jrfnl](https://github.com/jrfnl).
 
 ## [0.5] - 2020-05-13
 
