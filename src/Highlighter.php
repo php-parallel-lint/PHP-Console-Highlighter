@@ -1,7 +1,7 @@
 <?php
 namespace JakubOnderka\PhpConsoleHighlighter;
 
-use JakubOnderka\PhpConsoleColor\ConsoleColor;
+use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
 
 class Highlighter
 {
@@ -31,7 +31,7 @@ class Highlighter
 
     /**
      * @param ConsoleColor $color
-     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
      */
     public function __construct(ConsoleColor $color)
     {
@@ -50,7 +50,7 @@ class Highlighter
      * @param int $linesBefore
      * @param int $linesAfter
      * @return string
-     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
      * @throws \InvalidArgumentException
      */
     public function getCodeSnippet($source, $lineNumber, $linesBefore = 2, $linesAfter = 2)
@@ -70,7 +70,7 @@ class Highlighter
     /**
      * @param string $source
      * @return string
-     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
      * @throws \InvalidArgumentException
      */
     public function getWholeFile($source)
@@ -83,7 +83,7 @@ class Highlighter
     /**
      * @param string $source
      * @return string
-     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
      * @throws \InvalidArgumentException
      */
     public function getWholeFileWithLineNumbers($source)
@@ -215,7 +215,7 @@ class Highlighter
     /**
      * @param array $tokenLines
      * @return array
-     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
      * @throws \InvalidArgumentException
      */
     private function colorLines(array $tokenLines)
@@ -241,7 +241,7 @@ class Highlighter
      * @param array $lines
      * @param null|int $markLine
      * @return string
-     * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
+     * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
      */
     private function lineNumbers(array $lines, $markLine = null)
     {

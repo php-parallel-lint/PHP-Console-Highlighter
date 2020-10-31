@@ -1,5 +1,5 @@
 <?php
-use JakubOnderka\PhpConsoleColor\ConsoleColor;
+use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
 use JakubOnderka\PhpConsoleHighlighter\Highlighter;
 
 require __DIR__ . '/../vendor/autoload.php';
