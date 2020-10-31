@@ -11,8 +11,8 @@ class HighlighterTest extends TestCase
     protected function getConsoleColorMock()
     {
         $mock = method_exists($this, 'createMock')
-            ? $this->createMock('\JakubOnderka\PhpConsoleColor\ConsoleColor')
-            : $this->getMock('\JakubOnderka\PhpConsoleColor\ConsoleColor');
+            ? $this->createMock('\PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor')
+            : $this->getMock('\PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor');
 
         $mock->expects($this->any())
             ->method('apply')
