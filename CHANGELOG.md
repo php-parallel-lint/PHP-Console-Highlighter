@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
--  Composer: update allowed version for various dependencies from [@jrfnl](https://github.com/jrfnl).
+- Composer: update allowed version for various dependencies from [@jrfnl](https://github.com/jrfnl).
+- Use PHP Console Color to version 1.0 [#17](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/17) from [@jrfnl](https://github.com/jrfnl).
 
 ### Internal
 
