@@ -65,9 +65,7 @@
         <delete file="${basedir}/build/logs/phpunit.xml" quiet="true" />
 
         <exec executable="${phpunit}" failonerror="true">
-            <arg line='--configuration ${basedir}/phpunit.xml.dist' />
-            <arg line='-d memory_limit=256M' />
-            <arg line='--log-junit "${basedir}/build/logs/phpunit.xml"' />
+            <arg line='--no-coverage' />
             <arg line='${colors-arg.color}' />
         </exec>
     </target>
@@ -79,11 +77,6 @@
         <mkdir dir="${basedir}/build/coverage" />
 
         <exec executable="${phpunit}" failonerror="true">
-            <arg line='--configuration ${basedir}/phpunit.xml.dist' />
-            <arg line='-d memory_limit=256M' />
-            <arg line='--log-junit "${basedir}/build/logs/phpunit.xml"' />
-            <arg line='--coverage-clover "${basedir}/build/logs/clover.xml"' />
-            <arg line='--coverage-html "${basedir}/build/coverage/"' />
             <arg line='${colors-arg.color}' />
         </exec>
     </target>

@@ -16,4 +16,13 @@
         </whitelist>
     </filter>
 
+    <logging>
+        <log type="junit" target="build/logs/phpunit.xml"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="coverage-html" target="build/coverage/"/>
+    </logging>
+
+    <php>
+        <ini name="memory_limit" value="256M"/>
+    </php>
 </phpunit>
