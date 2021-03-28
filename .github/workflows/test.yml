@@ -1,0 +1,53 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
+        experimental: [false]
+
+        include:
+          - php: '8.1'
+            experimental: true
+
+    name: "Test on PHP ${{ matrix.php }}"
+    continue-on-error: ${{ matrix.experimental }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: cs2pr
+
+      # Install dependencies and handle caching in one go.
+      # @link https://github.com/marketplace/actions/install-composer-dependencies
+      - name: Install Composer dependencies - normal
+        if: ${{ matrix.experimental == false }}
+        uses: "ramsey/composer-install@v1"
+
+      # For the PHP "nightly", we need to install with ignore platform reqs as not all dependencies allow it.
+      - name: Install Composer dependencies - with ignore platform
+        if: ${{ matrix.experimental == true }}
+        uses: "ramsey/composer-install@v1"
+        with:
+          composer-options: --ignore-platform-reqs
+
+      - name: Lint
+        run: composer phplint -- --checkstyle | cs2pr
+
+      - name: Run unit tests
+        run: composer phpunit
