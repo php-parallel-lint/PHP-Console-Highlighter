@@ -5,3 +5,4 @@
 .travis.yml export-ignore
 build.xml export-ignore
 phpunit.xml.dist export-ignore
+phpcs.xml.dist export-ignore
