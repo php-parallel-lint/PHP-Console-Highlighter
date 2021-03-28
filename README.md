@@ -32,5 +32,6 @@ echo $highlighter->getWholeFile($fileContent);
 ------
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/php-parallel-lint/php-console-highlighter.svg)](https://packagist.org/packages/php-parallel-lint/php-console-highlighter)
-[![Build Status](https://travis-ci.org/php-parallel-lint/PHP-Console-Highlighter.svg?branch=master)](https://travis-ci.org/php-parallel-lint/PHP-Console-Highlighter)
+[![CS](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/cs.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/cs.yml)
+[![Test](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/test.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/test.yml)
 [![License](https://poser.pugx.org/php-parallel-lint/php-console-highlighter/license.svg)](https://packagist.org/packages/php-parallel-lint/php-console-highlighter)
