@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset name="Jakub Onderka Coding Standard">
+    <description>A coding standard for Jakub Onderka's projects.</description>
+
+    <file>./src/</file>
+
+    <!-- Only check PHP files. -->
+    <arg name="extensions" value="php"/>
+
+    <!-- Show progress, show the error codes for each message (source). -->
+    <arg value="ps"/>
+
+    <!-- Strip the filepaths down to the relevant bit. -->
+    <arg name="basepath" value="./"/>
+
+    <rule ref="./vendor/php-parallel-lint/php-code-style/ruleset.xml"/>
+
+	<rule ref="Generic.Metrics.CyclomaticComplexity.MaxExceeded">
+		<type>warning</type>
+	</rule>
+</ruleset>
