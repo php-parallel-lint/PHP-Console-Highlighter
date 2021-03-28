@@ -27,5 +27,40 @@
     },
     "replace": {
         "jakub-onderka/php-console-highlighter": "*"
+    },
+    "scripts" : {
+        "phplint": [
+            "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint . -e php --exclude vendor --exclude .git"
+        ],
+        "vardumpcheck": [
+            "@php ./vendor/php-parallel-lint/php-var-dump-check/var-dump-check . --exclude vendor --exclude .git"
+        ],
+        "phpcs": [
+            "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --report-full --report-checkstyle=./build/logs/checkstyle.xml"
+        ],
+        "fixcs": [
+            "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+        ],
+        "phpunit": [
+            "@php ./vendor/phpunit/phpunit/phpunit --no-coverage"
+        ],
+        "coverage": [
+            "@php ./vendor/phpunit/phpunit/phpunit"
+        ],
+        "build": [
+            "@phplint",
+            "@vardumpcheck",
+            "@phpcs",
+            "@phpunit"
+        ]
+    },
+    "scripts-descriptions": {
+        "phplint": "Check syntax errors in PHP files",
+        "vardumpcheck": "Check PHP files for forgotten variable dumps",
+        "phpcs": "Check PHP code style",
+        "fixcs": "Auto-fix PHP code style",
+        "phpunit": "PHP unit",
+        "coverage": "PHP unit with code coverage",
+        "build": "Run all checks"
     }
 }
