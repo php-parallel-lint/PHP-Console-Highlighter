@@ -279,4 +279,64 @@ EOL
             '<token_html> </token_html>'
         );
     }
+
+    public function testFunctionCall()
+    {
+        $this->compare(
+            <<<'EOL'
+<?php
+echo functionName();
+EOL
+            ,
+            <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL
+        );
+    }
+
+    public function testFQNFunctionCall()
+    {
+        $this->compare(
+            <<<'EOL'
+<?php
+echo \My\Package\functionName();
+EOL
+            ,
+            <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo \</token_keyword><token_default>My</token_default><token_keyword>\</token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL
+        );
+    }
+
+    public function testNamespaceRelativeFunctionCall()
+    {
+        $this->compare(
+            <<<'EOL'
+<?php
+echo namespace\functionName();
+EOL
+            ,
+            <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo namespace\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL
+        );
+    }
+
+    public function testQualifiedFunctionCall()
+    {
+        $this->compare(
+            <<<'EOL'
+<?php
+echo Package\functionName();
+EOL
+            ,
+            <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL
+        );
+    }
 }
