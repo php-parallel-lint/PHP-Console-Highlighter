@@ -297,46 +297,67 @@ EOL
 
     public function testFQNFunctionCall()
     {
-        $this->compare(
-            <<<'EOL'
+        $original = <<<'EOL'
 <?php
 echo \My\Package\functionName();
-EOL
-            ,
-            <<<'EOL'
+EOL;
+
+        if (PHP_VERSION_ID < 80000) {
+            $expected = <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>echo \</token_keyword><token_default>My</token_default><token_keyword>\</token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL
-        );
+EOL;
+        } else {
+            $expected = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>\My\Package\functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        }
+
+        $this->compare($original, $expected);
     }
 
     public function testNamespaceRelativeFunctionCall()
     {
-        $this->compare(
-            <<<'EOL'
+        $original = <<<'EOL'
 <?php
 echo namespace\functionName();
-EOL
-            ,
-            <<<'EOL'
+EOL;
+
+        if (PHP_VERSION_ID < 80000) {
+            $expected = <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>echo namespace\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL
-        );
+EOL;
+        } else {
+            $expected = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>namespace\functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        }
+
+        $this->compare($original, $expected);
     }
 
     public function testQualifiedFunctionCall()
     {
-        $this->compare(
-            <<<'EOL'
+        $original = <<<'EOL'
 <?php
 echo Package\functionName();
-EOL
-            ,
-            <<<'EOL'
+EOL;
+
+        if (PHP_VERSION_ID < 80000) {
+            $expected = <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>echo </token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL
-        );
+EOL;
+        } else {
+            $expected = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>Package\functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        }
+
+        $this->compare($original, $expected);
     }
 }
