@@ -118,46 +118,8 @@ class Highlighter
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                switch ($token[0]) {
-                    case T_WHITESPACE:
-                        break;
-
-                    case T_OPEN_TAG:
-                    case T_OPEN_TAG_WITH_ECHO:
-                    case T_CLOSE_TAG:
-                    case T_STRING:
-                    case T_VARIABLE:
-
-                    // Constants
-                    case T_DIR:
-                    case T_FILE:
-                    case T_METHOD_C:
-                    case T_DNUMBER:
-                    case T_LNUMBER:
-                    case T_NS_C:
-                    case T_LINE:
-                    case T_CLASS_C:
-                    case T_FUNC_C:
-                    case T_TRAIT_C:
-                        $newType = self::TOKEN_DEFAULT;
-                        break;
-
-                    case T_COMMENT:
-                    case T_DOC_COMMENT:
-                        $newType = self::TOKEN_COMMENT;
-                        break;
-
-                    case T_ENCAPSED_AND_WHITESPACE:
-                    case T_CONSTANT_ENCAPSED_STRING:
-                        $newType = self::TOKEN_STRING;
-                        break;
-
-                    case T_INLINE_HTML:
-                        $newType = self::TOKEN_HTML;
-                        break;
-
-                    default:
-                        $newType = self::TOKEN_KEYWORD;
+                if ($token[0] !== T_WHITESPACE) {
+                    $newType = $this->getTokenType($token);
                 }
             } else {
                 $newType = $token === '"' ? self::TOKEN_STRING : self::TOKEN_KEYWORD;
@@ -181,6 +143,59 @@ class Highlighter
         }
 
         return $output;
+    }
+
+    /**
+     * @param array $arrayToken
+     * @return string
+     */
+    private function getTokenType($arrayToken)
+    {
+        switch ($arrayToken[0]) {
+            case T_OPEN_TAG:
+            case T_OPEN_TAG_WITH_ECHO:
+            case T_CLOSE_TAG:
+            case T_STRING:
+            case T_VARIABLE:
+
+            // Constants
+            case T_DIR:
+            case T_FILE:
+            case T_METHOD_C:
+            case T_DNUMBER:
+            case T_LNUMBER:
+            case T_NS_C:
+            case T_LINE:
+            case T_CLASS_C:
+            case T_FUNC_C:
+            case T_TRAIT_C:
+                return self::TOKEN_DEFAULT;
+
+            case T_COMMENT:
+            case T_DOC_COMMENT:
+                return self::TOKEN_COMMENT;
+
+            case T_ENCAPSED_AND_WHITESPACE:
+            case T_CONSTANT_ENCAPSED_STRING:
+                return self::TOKEN_STRING;
+
+            case T_INLINE_HTML:
+                return self::TOKEN_HTML;
+        }
+
+        // Handle PHP >= 8.0 namespaced name tokens.
+        // https://www.php.net/manual/en/migration80.incompatible.php#migration80.incompatible.tokenizer
+        if (defined('T_NAME_QUALIFIED') && $arrayToken[0] === T_NAME_QUALIFIED) {
+            return self::TOKEN_DEFAULT;
+        }
+        if (defined('T_NAME_FULLY_QUALIFIED') && $arrayToken[0] === T_NAME_FULLY_QUALIFIED) {
+            return self::TOKEN_DEFAULT;
+        }
+        if (defined('T_NAME_RELATIVE') && $arrayToken[0] === T_NAME_RELATIVE) {
+            return self::TOKEN_DEFAULT;
+        }
+
+        return self::TOKEN_KEYWORD;
     }
 
     /**
