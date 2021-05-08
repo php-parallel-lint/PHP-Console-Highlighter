@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - PHPUnit: use a type-safe assertion [#15](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/15) from [@jrfnl](https://github.com/jrfnl).
 - PHPUnit: make the tests platform independent [#15](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/15) from [@jrfnl](https://github.com/jrfnl).
 - PHPUnit: use annotations for fixtures / cross-version compat up to PHPUnit 9.x [#15](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/15) from [@jrfnl](https://github.com/jrfnl).
+- PHPUnit: improve configuration [#21](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/21) from [@jrfnl](https://github.com/jrfnl).
 
 ## [0.5] - 2020-05-13
 
