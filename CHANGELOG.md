@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - PHP 8.0: handle changed tokenization of namespaced names [#19](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/19) from [@jrfnl](https://github.com/jrfnl).
 - PHPCS: various improvements [#20](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/20) from [@jrfnl](https://github.com/jrfnl).
 - CI: switch to ghactions [#23](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/23) from [@jrfnl](https://github.com/jrfnl).
+- GH Actions: set error reporting to E_ALL [#24](https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/24) from [@jrfnl](https://github.com/jrfnl).
 
 ## [0.5] - 2020-05-13
 
