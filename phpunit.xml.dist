@@ -2,7 +2,9 @@
 <phpunit
     backupGlobals="true"
     bootstrap="./vendor/autoload.php"
-    colors="true">
+    colors="true"
+    convertDeprecationsToExceptions="true"
+    >
 
     <testsuites>
         <testsuite name="PHP-Console-Highlighter">
