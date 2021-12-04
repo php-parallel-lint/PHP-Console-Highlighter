@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    backupGlobals="true"
-    bootstrap="./vendor/autoload.php"
-    colors="true"
-    convertDeprecationsToExceptions="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.2/phpunit.xsd"
+        backupGlobals="true"
+        beStrictAboutTestsThatDoNotTestAnything="true"
+        bootstrap="./vendor/autoload.php"
+        colors="true"
+        convertDeprecationsToExceptions="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="true"
+        stopOnFailure="false"
+        verbose="true"
     >
 
     <testsuites>
@@ -19,9 +28,9 @@
     </filter>
 
     <logging>
-        <log type="junit" target="build/logs/phpunit.xml"/>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
         <log type="coverage-html" target="build/coverage/"/>
+        <log type="coverage-text" target="php://stdout" showOnlySummary="true"/>
     </logging>
 
     <php>
