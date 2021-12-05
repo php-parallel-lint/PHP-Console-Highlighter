@@ -58,6 +58,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added a .gitattributes file from [@reedy].
 - Updated installation command from [@cafferata].
 
+
+[Unreleased]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/compare/v0.5...HEAD
+[0.5]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/compare/v0.4...v0.5
+
 [@cafferata]: https://github.com/cafferata
 [@grogy]: https://github.com/grogy
 [@jrfnl]: https://github.com/jrfnl
