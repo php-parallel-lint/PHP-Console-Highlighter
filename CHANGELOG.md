@@ -8,15 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Composer: update allowed version for various dependencies from [@jrfnl].
+- Composer: update allowed version for various dependencies [#12] from [@jrfnl].
 - Use PHP Console Color to version 1.0 [#17] from [@jrfnl].
 
 ### Internal
 
 - Travis: add build against PHP 8.0 [#18] from [@jrfnl].
-- Added EOF (end of file) for some PHP files from [@peter279k].
-- To be compatible with future PHPUnit version, using the ^4.8.36 version at least from [@peter279k].
-- Changed namespace to PHPunit\Framework\TestCase class namespace from [@peter279k].
+- Added EOF (end of file) for some PHP files [#10] from [@peter279k].
+- To be compatible with future PHPUnit version, using the ^4.8.36 version at least [#10] from [@peter279k].
+- Changed namespace to PHPunit\Framework\TestCase class namespace [#10] from [@peter279k].
 - Travis: improve caching between builds [#14] from [@jrfnl].
 - Travis: change from "trusty" to "xenial" [#16] from [@jrfnl].
 - PHPUnit: use a type-safe assertion [#15] from [@jrfnl].
@@ -28,6 +28,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - CI: switch to ghactions [#23] from [@jrfnl].
 - GH Actions: set error reporting to E_ALL [#24] from [@jrfnl].
 
+[#10]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/10
+[#12]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/12
 [#14]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/14
 [#15]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/15
 [#16]: https://github.com/php-parallel-lint/PHP-Console-Highlighter/pull/16
