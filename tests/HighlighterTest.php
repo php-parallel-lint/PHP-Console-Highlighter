@@ -1,5 +1,7 @@
 <?php
-namespace JakubOnderka\PhpConsoleHighlighter;
+namespace PHP_Parallel_Lint\PhpConsoleHighlighter\Test;
+
+use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
 
 use PHPUnit\Framework\TestCase;
 

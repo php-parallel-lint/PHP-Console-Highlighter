@@ -19,7 +19,7 @@ Usage
 ```php
 <?php
 use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
-use JakubOnderka\PhpConsoleHighlighter\Highlighter;
+use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
 
 require __DIR__ . '/vendor/autoload.php';
 
