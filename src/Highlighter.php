@@ -1,5 +1,5 @@
 <?php
-namespace JakubOnderka\PhpConsoleHighlighter;
+namespace PHP_Parallel_Lint\PhpConsoleHighlighter;
 
 use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
 
