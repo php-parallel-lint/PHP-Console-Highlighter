@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Composer: update allowed version for various dependencies [#12] from [@jrfnl].
+- PHP 8.0: handle changed tokenization of namespaced names [#19] from [@jrfnl].
 - Use PHP Console Color to version 1.0 [#17] from [@jrfnl].
 
 ### Internal
@@ -23,8 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - PHPUnit: make the tests platform independent [#15] from [@jrfnl].
 - PHPUnit: use annotations for fixtures / cross-version compat up to PHPUnit 9.x [#15] from [@jrfnl].
 - PHPUnit: improve configuration [#21] from [@jrfnl].
-- PHP 8.0: handle changed tokenization of namespaced names [#19] from [@jrfnl].
 - PHPCS: various improvements [#20] from [@jrfnl].
+- Composer: update allowed version for various dependencies [#12] from [@jrfnl].
 - CI: switch to ghactions [#23] from [@jrfnl].
 - GH Actions: set error reporting to E_ALL [#24] from [@jrfnl].
 
