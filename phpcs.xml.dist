@@ -36,7 +36,7 @@
     -->
 
     <!-- Set the supported PHP versions for PHPCompatibility (included in PHPParallelLint). -->
-    <config name="testVersion" value="5.4-"/>
+    <config name="testVersion" value="5.3-"/>
 
     <rule ref="PHPParallelLint"/>
 

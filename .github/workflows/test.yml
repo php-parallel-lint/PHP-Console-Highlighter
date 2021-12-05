@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        php: ['5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        php: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
         experimental: [false]
 
         include:
@@ -39,6 +39,11 @@ jobs:
           ini-values: zend.assertions=1, error_reporting=-1, display_errors=On
           coverage: none
           tools: cs2pr
+
+      # Remove the PHPCS standard as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
+      - name: 'Composer: remove PHPCS'
+        if: ${{ matrix.php < 5.4 }}
+        run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-composer-dependencies
