@@ -46,7 +46,6 @@ class Highlighter
         T_FUNC_C   => T_FUNC_C,
         T_METHOD_C => T_METHOD_C,
         T_NS_C     => T_NS_C,
-        T_TRAIT_C  => T_TRAIT_C,
     );
 
     /** @var array */
@@ -213,6 +212,12 @@ class Highlighter
         }
 
         // phpcs:disable PHPCompatibility.Constants.NewConstants -- The new token constants are only used when defined.
+
+        // Traits didn't exist in PHP 5.3 yet, so the trait magic constant needs special casing for PHP >= 5.4.
+        // __TRAIT__ will tokenize as T_STRING in PHP 5.3, so, the end result will be the same cross-version.
+        if (defined('T_TRAIT_C') && $arrayToken[0] === T_TRAIT_C) {
+            return self::TOKEN_DEFAULT;
+        }
 
         // Handle PHP >= 8.0 namespaced name tokens.
         // https://www.php.net/manual/en/migration80.incompatible.php#migration80.incompatible.tokenizer
