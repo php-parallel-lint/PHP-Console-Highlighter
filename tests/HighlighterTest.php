@@ -1,8 +1,8 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpConsoleHighlighter\Test;
 
 use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
-
 use PHPUnit\Framework\TestCase;
 
 class HighlighterTest extends TestCase
@@ -267,8 +267,7 @@ EOL
     public function testEmpty()
     {
         $this->compare(
-            ''
-            ,
+            '',
             ''
         );
     }
@@ -276,8 +275,7 @@ EOL
     public function testWhitespace()
     {
         $this->compare(
-            ' '
-            ,
+            ' ',
             '<token_html> </token_html>'
         );
     }

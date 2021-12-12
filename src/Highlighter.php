@@ -1,4 +1,5 @@
 <?php
+
 namespace PHP_Parallel_Lint\PhpConsoleHighlighter;
 
 use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
@@ -157,7 +158,6 @@ class Highlighter
             case T_CLOSE_TAG:
             case T_STRING:
             case T_VARIABLE:
-
             // Constants
             case T_DIR:
             case T_FILE:
@@ -183,6 +183,8 @@ class Highlighter
                 return self::TOKEN_HTML;
         }
 
+        // phpcs:disable PHPCompatibility.Constants.NewConstants -- The new token constants are only used when defined.
+
         // Handle PHP >= 8.0 namespaced name tokens.
         // https://www.php.net/manual/en/migration80.incompatible.php#migration80.incompatible.tokenizer
         if (defined('T_NAME_QUALIFIED') && $arrayToken[0] === T_NAME_QUALIFIED) {
@@ -194,6 +196,8 @@ class Highlighter
         if (defined('T_NAME_RELATIVE') && $arrayToken[0] === T_NAME_RELATIVE) {
             return self::TOKEN_DEFAULT;
         }
+
+        // phpcs:enable
 
         return self::TOKEN_KEYWORD;
     }
