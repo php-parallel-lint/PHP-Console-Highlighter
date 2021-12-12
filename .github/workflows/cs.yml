@@ -38,7 +38,7 @@ jobs:
         run: vendor/bin/phpcs --report-full --report-checkstyle=./checkstyle.xml
 
       - name: Show PHPCS results in PR
-        run: cs2pr ./checkstyle.xml --graceful-warnings
+        run: cs2pr ./checkstyle.xml
 
       - name: Make sure no vardumps remain
         run: composer vardumpcheck
