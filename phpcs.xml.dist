@@ -1,8 +1,20 @@
 <?xml version="1.0"?>
-<ruleset name="Jakub Onderka Coding Standard">
+<ruleset name="PHP-Console-Highlighter">
     <description>A coding standard for Jakub Onderka's projects.</description>
 
-    <file>./src/</file>
+    <!--
+    #############################################################################
+    COMMAND LINE ARGUMENTS
+    https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
+    #############################################################################
+    -->
+
+    <!-- Scan all files. -->
+    <file>.</file>
+
+    <!-- Exclude dependencies and auto-generated files. -->
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
 
     <!-- Only check PHP files. -->
     <arg name="extensions" value="php"/>
@@ -13,9 +25,27 @@
     <!-- Strip the filepaths down to the relevant bit. -->
     <arg name="basepath" value="./"/>
 
-    <rule ref="./vendor/php-parallel-lint/php-code-style/ruleset.xml"/>
+    <!-- Check up to 8 files simultaneously. -->
+    <arg name="parallel" value="8"/>
 
-	<rule ref="Generic.Metrics.CyclomaticComplexity.MaxExceeded">
-		<type>warning</type>
-	</rule>
+
+    <!--
+    #############################################################################
+    USE THE PHPParallelLint RULESET
+    #############################################################################
+    -->
+
+    <!-- Set the supported PHP versions for PHPCompatibility (included in PHPParallelLint). -->
+    <config name="testVersion" value="5.4-"/>
+
+    <rule ref="PHPParallelLint"/>
+
+    <rule ref="Generic.Metrics.CyclomaticComplexity.MaxExceeded">
+        <type>warning</type>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+
 </ruleset>
