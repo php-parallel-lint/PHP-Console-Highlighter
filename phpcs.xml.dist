@@ -40,10 +40,6 @@
 
     <rule ref="PHPParallelLint"/>
 
-    <rule ref="Generic.Metrics.CyclomaticComplexity.MaxExceeded">
-        <type>warning</type>
-    </rule>
-
     <rule ref="Generic.Files.LineLength">
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
