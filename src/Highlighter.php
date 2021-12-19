@@ -30,6 +30,50 @@ class Highlighter
         self::LINE_NUMBER => 'dark_gray',
     );
 
+    /** @var array */
+    private $phpTagTokens = array(
+        T_OPEN_TAG           => T_OPEN_TAG,
+        T_OPEN_TAG_WITH_ECHO => T_OPEN_TAG_WITH_ECHO,
+        T_CLOSE_TAG          => T_CLOSE_TAG,
+    );
+
+    /** @var array */
+    private $magicConstantTokens = array(
+        T_DIR      => T_DIR,
+        T_FILE     => T_FILE,
+        T_LINE     => T_LINE,
+        T_CLASS_C  => T_CLASS_C,
+        T_FUNC_C   => T_FUNC_C,
+        T_METHOD_C => T_METHOD_C,
+        T_NS_C     => T_NS_C,
+        T_TRAIT_C  => T_TRAIT_C,
+    );
+
+    /** @var array */
+    private $miscTokens = array(
+        T_STRING   => T_STRING, // Labels.
+        T_VARIABLE => T_VARIABLE,
+        T_DNUMBER  => T_DNUMBER, // Floats.
+        T_LNUMBER  => T_LNUMBER, // Integers.
+    );
+
+    /** @var array */
+    private $commentTokens = array(
+        T_COMMENT     => T_COMMENT,
+        T_DOC_COMMENT => T_DOC_COMMENT,
+    );
+
+    /** @var array */
+    private $textStringTokens = array(
+        T_ENCAPSED_AND_WHITESPACE  => T_ENCAPSED_AND_WHITESPACE,
+        T_CONSTANT_ENCAPSED_STRING => T_CONSTANT_ENCAPSED_STRING,
+    );
+
+    /** @var array */
+    private $htmlTokens = array(
+        T_INLINE_HTML => T_INLINE_HTML,
+    );
+
     /**
      * @param ConsoleColor $color
      * @throws \PHP_Parallel_Lint\PhpConsoleColor\InvalidStyleException
@@ -152,34 +196,19 @@ class Highlighter
      */
     private function getTokenType($arrayToken)
     {
-        switch ($arrayToken[0]) {
-            case T_OPEN_TAG:
-            case T_OPEN_TAG_WITH_ECHO:
-            case T_CLOSE_TAG:
-            case T_STRING:
-            case T_VARIABLE:
-            // Constants
-            case T_DIR:
-            case T_FILE:
-            case T_METHOD_C:
-            case T_DNUMBER:
-            case T_LNUMBER:
-            case T_NS_C:
-            case T_LINE:
-            case T_CLASS_C:
-            case T_FUNC_C:
-            case T_TRAIT_C:
+        switch (true) {
+            case isset($this->phpTagTokens[$arrayToken[0]]):
+            case isset($this->magicConstantTokens[$arrayToken[0]]):
+            case isset($this->miscTokens[$arrayToken[0]]):
                 return self::TOKEN_DEFAULT;
 
-            case T_COMMENT:
-            case T_DOC_COMMENT:
+            case isset($this->commentTokens[$arrayToken[0]]):
                 return self::TOKEN_COMMENT;
 
-            case T_ENCAPSED_AND_WHITESPACE:
-            case T_CONSTANT_ENCAPSED_STRING:
+            case isset($this->textStringTokens[$arrayToken[0]]):
                 return self::TOKEN_STRING;
 
-            case T_INLINE_HTML:
+            case isset($this->htmlTokens[$arrayToken[0]]):
                 return self::TOKEN_HTML;
         }
 
@@ -187,13 +216,11 @@ class Highlighter
 
         // Handle PHP >= 8.0 namespaced name tokens.
         // https://www.php.net/manual/en/migration80.incompatible.php#migration80.incompatible.tokenizer
-        if (defined('T_NAME_QUALIFIED') && $arrayToken[0] === T_NAME_QUALIFIED) {
-            return self::TOKEN_DEFAULT;
-        }
-        if (defined('T_NAME_FULLY_QUALIFIED') && $arrayToken[0] === T_NAME_FULLY_QUALIFIED) {
-            return self::TOKEN_DEFAULT;
-        }
-        if (defined('T_NAME_RELATIVE') && $arrayToken[0] === T_NAME_RELATIVE) {
+        if (
+            (defined('T_NAME_QUALIFIED') && $arrayToken[0] === T_NAME_QUALIFIED)
+            || (defined('T_NAME_FULLY_QUALIFIED') && $arrayToken[0] === T_NAME_FULLY_QUALIFIED)
+            || (defined('T_NAME_RELATIVE') && $arrayToken[0] === T_NAME_RELATIVE)
+        ) {
             return self::TOKEN_DEFAULT;
         }
 
