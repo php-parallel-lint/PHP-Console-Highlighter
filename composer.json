@@ -30,6 +30,11 @@
     "replace": {
         "jakub-onderka/php-console-highlighter": "*"
     },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
     "scripts" : {
         "phplint": [
             "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint . -e php --exclude vendor --exclude .git"
