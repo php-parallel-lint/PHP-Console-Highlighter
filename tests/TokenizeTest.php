@@ -48,6 +48,17 @@ class TokenizeTest extends TestCase
         return $mock;
     }
 
+    /**
+     * Helper method executing the actual tests.
+     *
+     * {@internal This is a work-around to allow for supporting PHPUnit 4.x.
+     * In PHPUnit 5 and higher, a test method can have multiple data provider tags and
+     * will execute the test cases for each. Unfortunately, that wasn't supported in PHPUnit 4.x.
+     * This effectively means that each data provider needs its own test method for now.}
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
     protected function compare($original, $expected)
     {
         $output = $this->uut->getWholeFile($original);
@@ -55,6 +66,38 @@ class TokenizeTest extends TestCase
         $output = str_replace(array("\r\n", "\r"), "\n", $output);
 
         $this->assertSame($expected, $output);
+    }
+
+    /**
+     * Test the tokenizer and token specific highlighting of "empty" inputs.
+     *
+     * @dataProvider dataEmptyFiles
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testEmptyFiles($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataEmptyFiles()
+    {
+        return array(
+            'Empty file' => array(
+                'original' => '',
+                'expected' => '',
+            ),
+            'File only containing whitespace' => array(
+                'original' => '  ',
+                'expected' => '<token_html>  </token_html>',
+            ),
+        );
     }
 
     public function testVariable()
@@ -272,22 +315,6 @@ EOL
 <token_default><?php</token_default>
 <token_comment># Ahoj</token_comment>
 EOL
-        );
-    }
-
-    public function testEmpty()
-    {
-        $this->compare(
-            '',
-            ''
-        );
-    }
-
-    public function testWhitespace()
-    {
-        $this->compare(
-            ' ',
-            '<token_html> </token_html>'
         );
     }
 
