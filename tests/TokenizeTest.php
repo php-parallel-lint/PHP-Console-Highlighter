@@ -506,6 +506,39 @@ EOL
         );
     }
 
+    /**
+     * Test the tokenizer and token specific highlighting of inline HTML tokens.
+     *
+     * @dataProvider dataInlineHtml
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testInlineHtml($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataInlineHtml()
+    {
+        return array(
+            'Inline HTML' => array(
+                'original' => <<<'EOL'
+<div><?= $text ?></div>
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_html><div></token_html><token_default><?= $text ?></token_default><token_html></div></token_html>
+EOL
+            ),
+        );
+    }
+
     public function testBasicFunction()
     {
         $this->compare(
