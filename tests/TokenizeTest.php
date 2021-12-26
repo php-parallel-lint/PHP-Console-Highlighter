@@ -428,6 +428,81 @@ EOL
 <token_keyword>echo </token_keyword><token_string>"Ahoj světe"</token_string><token_keyword>;</token_keyword>
 EOL
             ),
+            'Double quoted text string with interpolation [1]' => array(
+                'original' => <<<'EOL'
+<?php
+echo "Ahoj $text and more text";
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_string>"Ahoj </token_string><token_default>$text</token_default><token_string> and more text"</token_string><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Double quoted text string with interpolation [2]' => array(
+                'original' => <<<'EOL'
+<?php
+echo "$text and more text";
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_string>"</token_string><token_default>$text</token_default><token_string> and more text"</token_string><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Double quoted text string with interpolation [3]' => array(
+                'original' => <<<'EOL'
+<?php
+echo "Ahoj {$obj->prop} and more text";
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_string>"Ahoj </token_string><token_keyword>{</token_keyword><token_default>$obj</token_default><token_keyword>-></token_keyword><token_default>prop</token_default><token_keyword>}</token_keyword><token_string> and more text"</token_string><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Nowdoc' => array(
+                'original' => '<?php
+echo <<<\'TXT\'
+Text
+TXT;
+',
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo <<<'TXT'</token_keyword>
+<token_string>Text</token_string>
+<token_keyword>TXT;</token_keyword>
+
+EOL
+            ),
+            'Heredoc' => array(
+                'original' => '<?php
+echo <<<TXT
+Text
+TXT;
+',
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo <<<TXT</token_keyword>
+<token_string>Text</token_string>
+<token_keyword>TXT;</token_keyword>
+
+EOL
+            ),
+            'Heredoc with interpolation' => array(
+                'original' => '<?php
+echo <<<TXT
+Text $text
+TXT;
+',
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo <<<TXT</token_keyword>
+<token_string>Text </token_string><token_default>$text</token_default>
+<token_keyword>TXT;</token_keyword>
+
+EOL
+            ),
         );
     }
 
