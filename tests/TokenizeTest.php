@@ -100,6 +100,48 @@ class TokenizeTest extends TestCase
         );
     }
 
+    /**
+     * Test the tokenizer and token specific highlighting of PHP tag tokens.
+     *
+     * @dataProvider dataPhpTags
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testPhpTags($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataPhpTags()
+    {
+        return array(
+            '"Long" open tag with close tag' => array(
+                'original' => <<<'EOL'
+<?php echo PHP_EOL; ?>
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php </token_default><token_keyword>echo </token_keyword><token_default>PHP_EOL</token_default><token_keyword>; </token_keyword><token_default>?></token_default>
+EOL
+            ),
+            'Short open tag with close tag' => array(
+                'original' => <<<'EOL'
+text <?= /* comment */ ?> more text
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_html>text </token_html><token_default><?= </token_default><token_comment>/* comment */ </token_comment><token_default>?></token_default><token_html> more text</token_html>
+EOL
+            ),
+        );
+    }
+
     public function testVariable()
     {
         $this->compare(
