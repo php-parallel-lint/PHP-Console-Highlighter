@@ -5,11 +5,30 @@ namespace PHP_Parallel_Lint\PhpConsoleHighlighter\Test;
 use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
 use PHPUnit\Framework\TestCase;
 
-class HighlighterTest extends TestCase
+/**
+ * Test support for all token types.
+ *
+ * @covers PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter::tokenize
+ * @covers PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter::getTokenType
+ */
+class TokenizeTest extends TestCase
 {
     /** @var Highlighter */
     private $uut;
 
+    /**
+     * @before
+     */
+    protected function setUpHighlighter()
+    {
+        $this->uut = new Highlighter($this->getConsoleColorMock());
+    }
+
+    /**
+     * Helper method mocking the Console Color Class.
+     *
+     * @return \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor
+     */
     protected function getConsoleColorMock()
     {
         $mock = method_exists($this, 'createMock')
@@ -27,14 +46,6 @@ class HighlighterTest extends TestCase
             ->will($this->returnValue(true));
 
         return $mock;
-    }
-
-    /**
-     * @before
-     */
-    protected function setUpHighlighter()
-    {
-        $this->uut = new Highlighter($this->getConsoleColorMock());
     }
 
     protected function compare($original, $expected)
