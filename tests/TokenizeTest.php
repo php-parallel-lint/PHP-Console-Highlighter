@@ -142,6 +142,55 @@ EOL
         );
     }
 
+    /**
+     * Test the tokenizer and token specific highlighting of the magic constants.
+     *
+     * @dataProvider dataMagicConstants
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testMagicConstants($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataMagicConstants()
+    {
+        $magicConstants = array(
+            '__FILE__',
+            '__LINE__',
+            '__CLASS__',
+            '__FUNCTION__',
+            '__METHOD__',
+            '__TRAIT__',
+            '__DIR__',
+            '__NAMESPACE__'
+        );
+
+        $data = array();
+        foreach ($magicConstants as $constant) {
+            $data['Magic constant: ' . $constant] = array(
+                'original' => <<<EOL
+<?php
+$constant;
+EOL
+                ,
+                'expected' => <<<EOL
+<token_default><?php</token_default>
+<token_default>$constant</token_default><token_keyword>;</token_keyword>
+EOL
+            );
+        }
+
+        return $data;
+    }
+
     public function testVariable()
     {
         $this->compare(
@@ -264,37 +313,6 @@ EOL
 <token_default>$a </token_default><token_keyword>instanceof </token_keyword><token_default>stdClass</token_default><token_keyword>;</token_keyword>
 EOL
         );
-    }
-
-    /*
-     * Constants
-     */
-    public function testConstant()
-    {
-        $constants = array(
-            '__FILE__',
-            '__LINE__',
-            '__CLASS__',
-            '__FUNCTION__',
-            '__METHOD__',
-            '__TRAIT__',
-            '__DIR__',
-            '__NAMESPACE__'
-        );
-
-        foreach ($constants as $constant) {
-            $this->compare(
-                <<<EOL
-<?php
-$constant;
-EOL
-                ,
-                <<<EOL
-<token_default><?php</token_default>
-<token_default>$constant</token_default><token_keyword>;</token_keyword>
-EOL
-            );
-        }
     }
 
     /*
