@@ -302,6 +302,25 @@ EOL
 <token_comment>/** Ahoj */</token_comment>
 EOL
             ),
+            'Doc block: multi line' => array(
+                'original' => <<<'EOL'
+<?php
+/**
+ * Ahoj
+ *
+ * @param type $name Description
+ */
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment>/**</token_comment>
+<token_comment> * Ahoj</token_comment>
+<token_comment> *</token_comment>
+<token_comment> * @param type $name Description</token_comment>
+<token_comment> */</token_comment>
+EOL
+            ),
             'Star comment: single line' => array(
                 'original' => <<<'EOL'
 <?php
@@ -313,6 +332,21 @@ EOL
 <token_comment>/* Ahoj */</token_comment>
 EOL
             ),
+            'Star comment: multi line' => array(
+                'original' => <<<'EOL'
+<?php
+/*
+    Ahoj
+ */
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment>/*</token_comment>
+<token_comment>    Ahoj</token_comment>
+<token_comment> */</token_comment>
+EOL
+            ),
             'Slash comment' => array(
                 'original' => <<<'EOL'
 <?php
@@ -322,6 +356,19 @@ EOL
                 'expected' => <<<'EOL'
 <token_default><?php</token_default>
 <token_comment>// Ahoj</token_comment>
+EOL
+            ),
+            'Slash comment, multiple' => array(
+                'original' => <<<'EOL'
+<?php
+// Ahoj
+// Ahoj again
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment>// Ahoj</token_comment>
+<token_comment>// Ahoj again</token_comment>
 EOL
             ),
             'Hash comment' => array(
