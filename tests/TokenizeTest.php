@@ -270,6 +270,74 @@ EOL
         );
     }
 
+    /**
+     * Test the tokenizer and token specific highlighting of comment tokens.
+     *
+     * @dataProvider dataComments
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testComments($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataComments()
+    {
+        return array(
+            'Doc block: single line' => array(
+                'original' => <<<'EOL'
+<?php
+/** Ahoj */
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment>/** Ahoj */</token_comment>
+EOL
+            ),
+            'Star comment: single line' => array(
+                'original' => <<<'EOL'
+<?php
+/* Ahoj */
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment>/* Ahoj */</token_comment>
+EOL
+            ),
+            'Slash comment' => array(
+                'original' => <<<'EOL'
+<?php
+// Ahoj
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment>// Ahoj</token_comment>
+EOL
+            ),
+            'Hash comment' => array(
+                'original' => <<<'EOL'
+<?php
+# Ahoj
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_comment># Ahoj</token_comment>
+EOL
+            ),
+        );
+    }
+
     public function testBasicFunction()
     {
         $this->compare(
@@ -330,69 +398,6 @@ EOL
             <<<'EOL'
 <token_default><?php</token_default>
 <token_default>$a </token_default><token_keyword>instanceof </token_keyword><token_default>stdClass</token_default><token_keyword>;</token_keyword>
-EOL
-        );
-    }
-
-    /*
-     * Comments
-     */
-    public function testComment()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-/* Ahoj */
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_comment>/* Ahoj */</token_comment>
-EOL
-        );
-    }
-
-    public function testDocComment()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-/** Ahoj */
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_comment>/** Ahoj */</token_comment>
-EOL
-        );
-    }
-
-    public function testInlineComment()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-// Ahoj
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_comment>// Ahoj</token_comment>
-EOL
-        );
-    }
-
-    public function testHashComment()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-# Ahoj
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_comment># Ahoj</token_comment>
 EOL
         );
     }
