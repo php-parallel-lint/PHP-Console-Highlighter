@@ -191,63 +191,71 @@ EOL
         return $data;
     }
 
-    public function testVariable()
+    /**
+     * Test the tokenizer and token specific highlighting of the "miscellaneous" tokens.
+     *
+     * @dataProvider dataMiscTokens
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testMiscTokens($original, $expected)
     {
-        $this->compare(
-            <<<'EOL'
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataMiscTokens()
+    {
+        return array(
+            'Variable' => array(
+                'original' => <<<'EOL'
 <?php
 echo $a;
 EOL
-            ,
-            <<<'EOL'
+                ,
+                'expected' => <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>echo </token_keyword><token_default>$a</token_default><token_keyword>;</token_keyword>
 EOL
-        );
-    }
-
-    public function testInteger()
-    {
-        $this->compare(
-            <<<'EOL'
+            ),
+            'Integer: decimal' => array(
+                'original' => <<<'EOL'
 <?php
 echo 43;
 EOL
-            ,
-            <<<'EOL'
+                ,
+                'expected' => <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>echo </token_keyword><token_default>43</token_default><token_keyword>;</token_keyword>
 EOL
-        );
-    }
-
-    public function testFloat()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-echo 43.3;
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_default>43.3</token_default><token_keyword>;</token_keyword>
-EOL
-        );
-    }
-
-    public function testHex()
-    {
-        $this->compare(
-            <<<'EOL'
+            ),
+            'Integer: hexadecimal' => array(
+                'original' => <<<'EOL'
 <?php
 echo 0x43;
 EOL
-            ,
-            <<<'EOL'
+                ,
+                'expected' => <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>echo </token_keyword><token_default>0x43</token_default><token_keyword>;</token_keyword>
 EOL
+            ),
+            'Float' => array(
+                'original' => <<<'EOL'
+<?php
+echo 43.3;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>43.3</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
         );
     }
 
