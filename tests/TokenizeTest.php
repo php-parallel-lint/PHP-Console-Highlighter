@@ -212,6 +212,17 @@ EOL
     public function dataMiscTokens()
     {
         return array(
+            'Constant (T_STRING)' => array(
+                'original' => <<<'EOL'
+<?php
+echo PHP_EOL;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>PHP_EOL</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
             'Variable' => array(
                 'original' => <<<'EOL'
 <?php
