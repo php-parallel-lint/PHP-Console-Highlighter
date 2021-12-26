@@ -385,6 +385,52 @@ EOL
         );
     }
 
+    /**
+     * Test the tokenizer and token specific highlighting of text string tokens.
+     *
+     * @dataProvider dataTextStrings
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testTextStrings($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider for testing text string tokens.
+     *
+     * @return array
+     */
+    public function dataTextStrings()
+    {
+        return array(
+            'Single quoted text string' => array(
+                'original' => <<<'EOL'
+<?php
+echo 'Ahoj světe';
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_string>'Ahoj světe'</token_string><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Double quoted text string' => array(
+                'original' => <<<'EOL'
+<?php
+echo "Ahoj světe";
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_string>"Ahoj světe"</token_string><token_keyword>;</token_keyword>
+EOL
+            ),
+        );
+    }
+
     public function testBasicFunction()
     {
         $this->compare(
@@ -400,36 +446,6 @@ EOL
 <token_keyword>function </token_keyword><token_default>plus</token_default><token_keyword>(</token_keyword><token_default>$a</token_default><token_keyword>, </token_keyword><token_default>$b</token_default><token_keyword>) {</token_keyword>
 <token_keyword>    return </token_keyword><token_default>$a </token_default><token_keyword>+ </token_keyword><token_default>$b</token_default><token_keyword>;</token_keyword>
 <token_keyword>}</token_keyword>
-EOL
-        );
-    }
-
-    public function testStringNormal()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-echo 'Ahoj světe';
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_string>'Ahoj světe'</token_string><token_keyword>;</token_keyword>
-EOL
-        );
-    }
-
-    public function testStringDouble()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-echo "Ahoj světe";
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_string>"Ahoj světe"</token_string><token_keyword>;</token_keyword>
 EOL
         );
     }
