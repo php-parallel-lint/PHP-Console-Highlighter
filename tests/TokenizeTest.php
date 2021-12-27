@@ -677,6 +677,84 @@ EOL
 <token_keyword>}</token_keyword>
 EOL
             ),
+            'Keywords: while, empty, exit' => array(
+                'original' => <<<'EOL'
+<?php
+while(empty($a)) { exit; }
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>while(empty(</token_keyword><token_default>$a</token_default><token_keyword>)) { exit; }</token_keyword>
+EOL
+            ),
+            'Keywords: type casts' => array(
+                'original' => <<<'EOL'
+<?php
+$a = (int) (bool) $a . (string) $b;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_default>$a </token_default><token_keyword>= (int) (bool) </token_keyword><token_default>$a </token_default><token_keyword>. (string) </token_keyword><token_default>$b</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Keywords: new, clone' => array(
+                'original' => <<<'EOL'
+<?php
+$obj = new stdClass;
+$clone = clone $obj;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_default>$obj </token_default><token_keyword>= new </token_keyword><token_default>stdClass</token_default><token_keyword>;</token_keyword>
+<token_default>$clone </token_default><token_keyword>= clone </token_keyword><token_default>$obj</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Operators: arithmetic operators' => array(
+                'original' => <<<'EOL'
+<?php
+echo 1 + 2 - 2 * 10 / 5 ** 1;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>1 </token_default><token_keyword>+ </token_keyword><token_default>2 </token_default><token_keyword>- </token_keyword><token_default>2 </token_default><token_keyword>* </token_keyword><token_default>10 </token_default><token_keyword>/ </token_keyword><token_default>5 </token_default><token_keyword>** </token_keyword><token_default>1</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Operators: assignment operators' => array(
+                'original' => <<<'EOL'
+<?php
+$a = 10;
+$a *= 10;
+$a ^= 10;
+$a ??= $b;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_default>$a </token_default><token_keyword>= </token_keyword><token_default>10</token_default><token_keyword>;</token_keyword>
+<token_default>$a </token_default><token_keyword>*= </token_keyword><token_default>10</token_default><token_keyword>;</token_keyword>
+<token_default>$a </token_default><token_keyword>^= </token_keyword><token_default>10</token_default><token_keyword>;</token_keyword>
+<token_default>$a </token_default><token_keyword>??= </token_keyword><token_default>$b</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Operators: comparison, boolean and logical operators' => array(
+                'original' => <<<'EOL'
+<?php
+echo '' === '' && '' !== '';
+echo true || '' > '';
+echo '' <=> '' and '' or ! '';
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_string>'' </token_string><token_keyword>=== </token_keyword><token_string>'' </token_string><token_keyword>&& </token_keyword><token_string>'' </token_string><token_keyword>!== </token_keyword><token_string>''</token_string><token_keyword>;</token_keyword>
+<token_keyword>echo </token_keyword><token_default>true </token_default><token_keyword>|| </token_keyword><token_string>'' </token_string><token_keyword>> </token_keyword><token_string>''</token_string><token_keyword>;</token_keyword>
+<token_keyword>echo </token_keyword><token_string>'' </token_string><token_keyword><=> </token_keyword><token_string>'' </token_string><token_keyword>and </token_keyword><token_string>'' </token_string><token_keyword>or ! </token_keyword><token_string>''</token_string><token_keyword>;</token_keyword>
+EOL
+            ),
         );
     }
 }
