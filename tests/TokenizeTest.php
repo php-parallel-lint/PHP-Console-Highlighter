@@ -3,7 +3,6 @@
 namespace PHP_Parallel_Lint\PhpConsoleHighlighter\Test;
 
 use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Test support for all token types.
@@ -11,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  * @covers PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter::tokenize
  * @covers PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter::getTokenType
  */
-class TokenizeTest extends TestCase
+class TokenizeTest extends HighlighterTestCase
 {
     /** @var Highlighter */
     private $uut;
@@ -22,30 +21,6 @@ class TokenizeTest extends TestCase
     protected function setUpHighlighter()
     {
         $this->uut = new Highlighter($this->getConsoleColorMock());
-    }
-
-    /**
-     * Helper method mocking the Console Color Class.
-     *
-     * @return \PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor
-     */
-    protected function getConsoleColorMock()
-    {
-        $mock = method_exists($this, 'createMock')
-            ? $this->createMock('\PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor')
-            : $this->getMock('\PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor');
-
-        $mock->expects($this->any())
-            ->method('apply')
-            ->will($this->returnCallback(function ($style, $text) {
-                return "<$style>$text</$style>";
-            }));
-
-        $mock->expects($this->any())
-            ->method('hasTheme')
-            ->will($this->returnValue(true));
-
-        return $mock;
     }
 
     /**
