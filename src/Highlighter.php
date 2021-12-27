@@ -315,6 +315,6 @@ class Highlighter
             $snippet .= $line . PHP_EOL;
         }
 
-        return $snippet;
+        return rtrim($snippet, PHP_EOL);
     }
 }
