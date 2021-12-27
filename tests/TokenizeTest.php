@@ -539,6 +539,97 @@ EOL
         );
     }
 
+    /**
+     * Test the tokenizer and token specific highlighting of name tokens.
+     *
+     * @dataProvider dataNameTokens
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testNameTokens($original, $expected)
+    {
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataNameTokens()
+    {
+        $data = array(
+            'Unqualified function call' => array(
+                'original' => <<<'EOL'
+<?php
+echo functionName();
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL
+            ),
+        );
+
+        $data['Fully qualified function call'] = array(
+            'original' => <<<'EOL'
+<?php
+echo \My\Package\functionName();
+EOL
+        );
+        if (PHP_VERSION_ID < 80000) {
+            $data['Fully qualified function call']['expected'] = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo \</token_keyword><token_default>My</token_default><token_keyword>\</token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        } else {
+            $data['Fully qualified function call']['expected'] = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>\My\Package\functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        }
+
+        $data['Namespace relative function call'] = array(
+            'original' => <<<'EOL'
+<?php
+echo namespace\functionName();
+EOL
+        );
+        if (PHP_VERSION_ID < 80000) {
+            $data['Namespace relative function call']['expected'] = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo namespace\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        } else {
+            $data['Namespace relative function call']['expected'] = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>namespace\functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        }
+
+        $data['Partially qualified function call'] = array(
+            'original' => <<<'EOL'
+<?php
+echo Package\functionName();
+EOL
+        );
+        if (PHP_VERSION_ID < 80000) {
+            $data['Partially qualified function call']['expected'] = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        } else {
+            $data['Partially qualified function call']['expected'] = <<<'EOL'
+<token_default><?php</token_default>
+<token_keyword>echo </token_keyword><token_default>Package\functionName</token_default><token_keyword>();</token_keyword>
+EOL;
+        }
+
+        return $data;
+    }
+
     public function testBasicFunction()
     {
         $this->compare(
@@ -571,86 +662,5 @@ EOL
 <token_default>$a </token_default><token_keyword>instanceof </token_keyword><token_default>stdClass</token_default><token_keyword>;</token_keyword>
 EOL
         );
-    }
-
-    public function testFunctionCall()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-echo functionName();
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL
-        );
-    }
-
-    public function testFQNFunctionCall()
-    {
-        $original = <<<'EOL'
-<?php
-echo \My\Package\functionName();
-EOL;
-
-        if (PHP_VERSION_ID < 80000) {
-            $expected = <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo \</token_keyword><token_default>My</token_default><token_keyword>\</token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL;
-        } else {
-            $expected = <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_default>\My\Package\functionName</token_default><token_keyword>();</token_keyword>
-EOL;
-        }
-
-        $this->compare($original, $expected);
-    }
-
-    public function testNamespaceRelativeFunctionCall()
-    {
-        $original = <<<'EOL'
-<?php
-echo namespace\functionName();
-EOL;
-
-        if (PHP_VERSION_ID < 80000) {
-            $expected = <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo namespace\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL;
-        } else {
-            $expected = <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_default>namespace\functionName</token_default><token_keyword>();</token_keyword>
-EOL;
-        }
-
-        $this->compare($original, $expected);
-    }
-
-    public function testQualifiedFunctionCall()
-    {
-        $original = <<<'EOL'
-<?php
-echo Package\functionName();
-EOL;
-
-        if (PHP_VERSION_ID < 80000) {
-            $expected = <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_default>Package</token_default><token_keyword>\</token_keyword><token_default>functionName</token_default><token_keyword>();</token_keyword>
-EOL;
-        } else {
-            $expected = <<<'EOL'
-<token_default><?php</token_default>
-<token_keyword>echo </token_keyword><token_default>Package\functionName</token_default><token_keyword>();</token_keyword>
-EOL;
-        }
-
-        $this->compare($original, $expected);
     }
 }
