@@ -630,37 +630,53 @@ EOL;
         return $data;
     }
 
-    public function testBasicFunction()
+    /**
+     * Test the tokenizer and token specific highlighting of keyword and operator tokens.
+     *
+     * @dataProvider dataKeywordsAndOperators
+     *
+     * @param string $original The input string.
+     * @param string $expected The expected output string.
+     */
+    public function testKeywordsAndOperators($original, $expected)
     {
-        $this->compare(
-            <<<'EOL'
+        $this->compare($original, $expected);
+    }
+
+    /**
+     * Data provider.
+     *
+     * @return array
+     */
+    public function dataKeywordsAndOperators()
+    {
+        return array(
+            'Keywords: instanceof' => array(
+                'original' => <<<'EOL'
+<?php
+$a instanceof stdClass;
+EOL
+                ,
+                'expected' => <<<'EOL'
+<token_default><?php</token_default>
+<token_default>$a </token_default><token_keyword>instanceof </token_keyword><token_default>stdClass</token_default><token_keyword>;</token_keyword>
+EOL
+            ),
+            'Keywords: function, return' => array(
+                'original' => <<<'EOL'
 <?php
 function plus($a, $b) {
     return $a + $b;
 }
 EOL
-            ,
-            <<<'EOL'
+                ,
+                'expected' => <<<'EOL'
 <token_default><?php</token_default>
 <token_keyword>function </token_keyword><token_default>plus</token_default><token_keyword>(</token_keyword><token_default>$a</token_default><token_keyword>, </token_keyword><token_default>$b</token_default><token_keyword>) {</token_keyword>
 <token_keyword>    return </token_keyword><token_default>$a </token_default><token_keyword>+ </token_keyword><token_default>$b</token_default><token_keyword>;</token_keyword>
 <token_keyword>}</token_keyword>
 EOL
-        );
-    }
-
-    public function testInstanceof()
-    {
-        $this->compare(
-            <<<'EOL'
-<?php
-$a instanceof stdClass;
-EOL
-            ,
-            <<<'EOL'
-<token_default><?php</token_default>
-<token_default>$a </token_default><token_keyword>instanceof </token_keyword><token_default>stdClass</token_default><token_keyword>;</token_keyword>
-EOL
+            ),
         );
     }
 }
