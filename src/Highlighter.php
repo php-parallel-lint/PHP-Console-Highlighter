@@ -103,7 +103,13 @@ class Highlighter
 
         $offset = $lineNumber - $linesBefore - 1;
         $offset = max($offset, 0);
-        $length = $linesAfter + $linesBefore + 1;
+
+        if ($lineNumber <= $linesBefore) {
+            $length = $lineNumber + $linesAfter;
+        } else {
+            $length = $linesAfter + $linesBefore + 1;
+        }
+
         $tokenLines = array_slice($tokenLines, $offset, $length, $preserveKeys = true);
 
         $lines = $this->colorLines($tokenLines);
