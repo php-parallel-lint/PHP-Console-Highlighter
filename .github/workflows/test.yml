@@ -32,11 +32,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup ini config
+        id: set_ini
+        run: |
+          # On PHP 5.3, short_open_tag needs to be turned on for short open echo tags to be recognized
+          # a PHP tags. As this only affects PHP 5.3, this is not something of serious concern.
+          if [ ${{ matrix.php }} == "5.3" ]; then
+            echo '::set-output name=PHP_INI::zend.assertions=1, error_reporting=-1, display_errors=On, short_open_tag=On'
+          else
+            echo '::set-output name=PHP_INI::zend.assertions=1, error_reporting=-1, display_errors=On'
+          fi
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          ini-values: zend.assertions=1, error_reporting=-1, display_errors=On
+          ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
           coverage: none
           tools: cs2pr
 
