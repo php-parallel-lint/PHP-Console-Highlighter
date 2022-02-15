@@ -35,3 +35,4 @@ echo $highlighter->getWholeFile($fileContent);
 [![CS](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/cs.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/cs.yml)
 [![Test](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/test.yml/badge.svg)](https://github.com/php-parallel-lint/PHP-Console-Highlighter/actions/workflows/test.yml)
 [![License](https://poser.pugx.org/php-parallel-lint/php-console-highlighter/license.svg)](https://packagist.org/packages/php-parallel-lint/php-console-highlighter)
+[![Coverage Status](https://coveralls.io/repos/github/php-parallel-lint/PHP-Console-Highlighter/badge.svg?branch=master)](https://coveralls.io/github/php-parallel-lint/PHP-Console-Highlighter?branch=master)
