@@ -15,19 +15,19 @@ _Nothing yet._
 
 - Bug fix: if the highlighted code snippet was at the start of the file, too many lines were retrieved, [#35] from [@jrfnl].
 - Bug fix: code snippets highlighted with line numbers had a stray blank line at the end of the snippet, [#35] from [@jrfnl].
+- PHP 8.0: handle changed tokenization of namespaced names [#19] from [@jrfnl].
 
 ### Changed
 
 - BC-Break: The top-level namespace for all classes has changed from `JakubOnderka` to `PHP_Parallel_Lint`. [#28] from [@jrfnl], fixes [#4].
 - Support for PHP 5.3 has been restored, [#33] from [@jrfnl].
-- PHP 8.0: handle changed tokenization of namespaced names [#19] from [@jrfnl].
 - Update [PHP Console Color] dependency to version `^1.0.1` [#17] from [@jrfnl].
 
 ### Internal
 
 - Welcome [@jrfnl] as new co-maintainer.
 - Improvements to the test suite, [#10], [#15], [#21], [#25], [#34], [#35], [#37], [#38], [#39] from [@peter279k] and [@jrfnl].
-- Improvements to the code consistency, [#10], [#20], [#29], [#30], [#] from [@peter279k] and [@jrfnl], fixes [#11].
+- Improvements to the code consistency, [#10], [#20], [#29], [#30] from [@peter279k] and [@jrfnl], fixes [#11].
 - Improvements to the CI/QA setup, [#12], [#14], [#16], [#18], [#23], [#24], [#26], [#31], [#36] from [@jrfnl], fixes [#13], [#22].
 - Improvements to the changelog, [#27] from [@jrfnl].
 
