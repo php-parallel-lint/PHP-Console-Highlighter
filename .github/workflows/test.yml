@@ -91,9 +91,9 @@ jobs:
           # On PHP 5.3, short_open_tag needs to be turned on for short open echo tags to be recognized
           # a PHP tags. As this only affects PHP 5.3, this is not something of serious concern.
           if [ ${{ matrix.php }} == "5.3" ]; then
-            echo '::set-output name=PHP_INI::zend.assertions=1, error_reporting=-1, display_errors=On, short_open_tag=On'
+            echo 'PHP_INI=zend.assertions=1, error_reporting=-1, display_errors=On, short_open_tag=On' >> $GITHUB_OUTPUT
           else
-            echo '::set-output name=PHP_INI::zend.assertions=1, error_reporting=-1, display_errors=On'
+            echo 'PHP_INI=zend.assertions=1, error_reporting=-1, display_errors=On' >> $GITHUB_OUTPUT
           fi
 
       - name: Setup PHP
