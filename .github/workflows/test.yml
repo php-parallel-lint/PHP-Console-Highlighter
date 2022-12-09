@@ -29,11 +29,12 @@ jobs:
           - '7.3'
           - '7.4'
           - '8.0'
-          # PHP 8.1 is tested in coverage section
+          - '8.1'
+          # PHP 8.2 is tested in coverage section
         experimental: [false]
 
         include:
-          - php: '8.2'
+          - php: '8.3'
             experimental: true
 
     name: "Test on PHP ${{ matrix.php }}"
@@ -79,7 +80,7 @@ jobs:
       matrix:
         include:
           - php: 5.3
-          - php: 8.1
+          - php: 8.2
     name: "Coverage on PHP ${{ matrix.php }}"
     steps:
       - name: Checkout code
@@ -129,7 +130,7 @@ jobs:
       # Global installing is used for compatibility with composer.lock in PHP 5.3
       - name: Install Coveralls
         if: ${{ success() }}
-        run: composer global require php-coveralls/php-coveralls:"^2.4.2" --no-interaction
+        run: composer global require php-coveralls/php-coveralls:"^2.5.3" --no-interaction
 
       - name: Upload coverage results to Coveralls
         if: ${{ success() }}
