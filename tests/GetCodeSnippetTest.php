@@ -57,7 +57,7 @@ EOL;
      *
      * @return array
      */
-    public function dataGetCodeSnippet()
+    public static function dataGetCodeSnippet()
     {
         return array(
             'Snippet at start of code - line 1' => array(

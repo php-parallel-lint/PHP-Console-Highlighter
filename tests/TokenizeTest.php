@@ -61,7 +61,7 @@ class TokenizeTest extends HighlighterTestCase
      *
      * @return array
      */
-    public function dataEmptyFiles()
+    public static function dataEmptyFiles()
     {
         return array(
             'Empty file' => array(
@@ -93,7 +93,7 @@ class TokenizeTest extends HighlighterTestCase
      *
      * @return array
      */
-    public function dataPhpTags()
+    public static function dataPhpTags()
     {
         return array(
             '"Long" open tag with close tag' => array(
@@ -135,7 +135,7 @@ EOL
      *
      * @return array
      */
-    public function dataMagicConstants()
+    public static function dataMagicConstants()
     {
         $magicConstants = array(
             '__FILE__',
@@ -184,7 +184,7 @@ EOL
      *
      * @return array
      */
-    public function dataMiscTokens()
+    public static function dataMiscTokens()
     {
         return array(
             'Constant (T_STRING)' => array(
@@ -263,7 +263,7 @@ EOL
      *
      * @return array
      */
-    public function dataComments()
+    public static function dataComments()
     {
         return array(
             'Doc block: single line' => array(
@@ -378,7 +378,7 @@ EOL
      *
      * @return array
      */
-    public function dataTextStrings()
+    public static function dataTextStrings()
     {
         return array(
             'Single quoted text string' => array(
@@ -499,7 +499,7 @@ EOL
      *
      * @return array
      */
-    public function dataInlineHtml()
+    public static function dataInlineHtml()
     {
         return array(
             'Inline HTML' => array(
@@ -532,7 +532,7 @@ EOL
      *
      * @return array
      */
-    public function dataNameTokens()
+    public static function dataNameTokens()
     {
         $data = array(
             'Unqualified function call' => array(
@@ -623,7 +623,7 @@ EOL;
      *
      * @return array
      */
-    public function dataKeywordsAndOperators()
+    public static function dataKeywordsAndOperators()
     {
         return array(
             'Keywords: instanceof' => array(

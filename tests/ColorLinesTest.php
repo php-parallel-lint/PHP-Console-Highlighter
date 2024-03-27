@@ -12,7 +12,7 @@ use ReflectionMethod;
 class ColorLinesTest extends HighlighterTestCase
 {
     /** @var string */
-    private $input = array(
+    private static $input = array(
         7 => array (
             0 => array (
                 0 => 'token_keyword',
@@ -70,7 +70,7 @@ class ColorLinesTest extends HighlighterTestCase
      *
      * @return array
      */
-    public function dataColorLines()
+    public static function dataColorLines()
     {
         return array(
             'No lines' => array(
@@ -78,14 +78,14 @@ class ColorLinesTest extends HighlighterTestCase
                 'expected' => array(),
             ),
             'With theme' => array(
-                'input'     => $this->input,
+                'input'     => self::$input,
                 'expected'  => array(
                     7 => '<token_keyword>function </token_keyword><token_default>bar</token_default><token_keyword>(</token_keyword><token_default>$param</token_default><token_unknown>) </token_unknown><token_keyword>{}</token_keyword>',
                 ),
                 'withTheme' => true,
             ),
             'Without theme' => array(
-                'input'     => $this->input,
+                'input'     => self::$input,
                 'expected'  => array(
                     7 => 'function bar($param) {}',
                 ),
@@ -110,7 +110,7 @@ class ColorLinesTest extends HighlighterTestCase
         $method->setAccessible(true);
 
         $highlighter = new Highlighter($color);
-        $output = $method->invoke($highlighter, $this->input);
+        $output = $method->invoke($highlighter, self::$input);
         $method->setAccessible(false);
 
         $this->assertSame($expected, $output);
