@@ -14,7 +14,7 @@ class GetWholeFileTest extends HighlighterTestCase
     private $highlighter;
 
     /** @var string */
-    private $input = <<<'EOL'
+    private static $input = <<<'EOL'
 <?php
 
 namespace FooBar;
@@ -68,7 +68,7 @@ EOL;
      *
      * @return array
      */
-    public function dataGetWholeFile()
+    public static function dataGetWholeFile()
     {
         return array(
             'Empty source' => array(
@@ -85,7 +85,7 @@ EOL
 EOL
             ),
             'Multi-line' => array(
-                'input'    => $this->input,
+                'input'    => self::$input,
                 'expected' => <<<'EOL'
 <token_default><?php</token_default>
 
@@ -135,7 +135,7 @@ EOL
 <line_number>15| </line_number><token_default>?></token_default>
 EOL;
 
-        $output = $this->highlighter->getWholeFileWithLineNumbers($this->input);
+        $output = $this->highlighter->getWholeFileWithLineNumbers(self::$input);
         // Allow unit tests to succeed on non-*nix systems.
         $output = str_replace(array("\r\n", "\r"), "\n", $output);
 
