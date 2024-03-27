@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/10.1/phpunit.xsd"
+        backupGlobals="true"
+        beStrictAboutTestsThatDoNotTestAnything="true"
+        bootstrap="./vendor/autoload.php"
+        colors="true"
+        displayDetailsOnTestsThatTriggerErrors="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        displayDetailsOnTestsThatTriggerNotices="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnIncompleteTests="true"
+        displayDetailsOnSkippedTests="true"
+        failOnWarning="true"
+        failOnNotice="true"
+        failOnDeprecation="true"
+        requireCoverageMetadata="true"
+    >
+
+    <testsuites>
+        <testsuite name="PHP-Console-Highlighter">
+            <directory suffix="Test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">./src/</directory>
+        </include>
+    </source>
+
+    <coverage includeUncoveredFiles="true" ignoreDeprecatedCodeUnits="true">
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+            <html outputDirectory="build/coverage/"/>
+            <text outputFile="php://stdout" showOnlySummary="true"/>
+        </report>
+    </coverage>
+
+    <php>
+        <ini name="memory_limit" value="256M"/>
+    </php>
+</phpunit>
