@@ -26,7 +26,7 @@
         "php-parallel-lint/php-console-color": "^1.0.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.1",
         "php-parallel-lint/php-parallel-lint": "^1.0",
         "php-parallel-lint/php-var-dump-check": "0.*",
         "php-parallel-lint/php-code-style": "^2.0"
@@ -55,8 +55,14 @@
         "phpunit": [
             "@php ./vendor/phpunit/phpunit/phpunit --no-coverage"
         ],
+        "phpunit10": [
+            "@php ./vendor/phpunit/phpunit/phpunit -c phpunit10.xml.dist --no-coverage"
+        ],
         "coverage": [
             "@php ./vendor/phpunit/phpunit/phpunit"
+        ],
+        "coverage10": [
+            "@php ./vendor/phpunit/phpunit/phpunit -c phpunit10.xml.dist"
         ],
         "build": [
             "@phplint",
@@ -70,8 +76,10 @@
         "vardumpcheck": "Check PHP files for forgotten variable dumps",
         "phpcs": "Check PHP code style",
         "fixcs": "Auto-fix PHP code style",
-        "phpunit": "PHP unit",
-        "coverage": "PHP unit with code coverage",
+        "phpunit": "Run the unit tests on PHPUnit 4.x - 9.x without code coverage.",
+        "phpunit10": "Run the unit tests on PHPUnit 10.x without code coverage.",
+        "coverage": "Run the unit tests on PHPUnit 4.x - 9.x with code coverage.",
+        "coverage10": "Run the unit tests on PHPUnit 10.x with code coverage.",
         "build": "Run all checks"
     }
 }

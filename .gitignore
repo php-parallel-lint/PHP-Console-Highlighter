@@ -3,6 +3,7 @@
 /vendor/
 /composer.lock
 phpunit.xml
+phpunit10.xml
 .phpunit.result.cache
 .phpcs.xml
 phpcs.xml
