@@ -56,11 +56,11 @@ class ColorLinesTest extends HighlighterTestCase
     public function testColorLines($input, $expected, $withTheme = true)
     {
         $method = new ReflectionMethod('PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter', 'colorLines');
-        $method->setAccessible(true);
+        (\PHP_VERSION_ID < 80100) && $method->setAccessible(true);
 
         $highlighter = new Highlighter($this->getConsoleColorMock($withTheme));
         $output = $method->invoke($highlighter, $input);
-        $method->setAccessible(false);
+        (\PHP_VERSION_ID < 80100) && $method->setAccessible(false);
 
         $this->assertSame($expected, $output);
     }
@@ -107,11 +107,11 @@ class ColorLinesTest extends HighlighterTestCase
         $color->setForceStyle(true);
 
         $method = new ReflectionMethod('PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter', 'colorLines');
-        $method->setAccessible(true);
+        (\PHP_VERSION_ID < 80100) && $method->setAccessible(true);
 
         $highlighter = new Highlighter($color);
         $output = $method->invoke($highlighter, self::$input);
-        $method->setAccessible(false);
+        (\PHP_VERSION_ID < 80100) && $method->setAccessible(false);
 
         $this->assertSame($expected, $output);
     }
