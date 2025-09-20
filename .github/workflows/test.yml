@@ -12,9 +12,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    permissions:
+      contents: read # To clone the repo.
 
     strategy:
       matrix:
@@ -40,8 +44,10 @@ jobs:
           - php: '8.6'
             experimental: true
 
-    name: "Test on PHP ${{ matrix.php }}"
     continue-on-error: ${{ matrix.experimental }}
+
+    name: "Test on PHP ${{ matrix.php }}"
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -92,16 +98,23 @@ jobs:
         run: composer phpunit10
 
   coverage:
+    permissions:
+      contents: read # To clone the repo.
+
     needs: test
+
     # Don't run on forks.
     if: github.repository_owner == 'php-parallel-lint' && needs.test.result == 'success'
-    runs-on: ubuntu-latest
+
     strategy:
       matrix:
         include:
           - php: 5.3
           - php: 8.5
+
     name: "Coverage on PHP ${{ matrix.php }}"
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -166,10 +179,13 @@ jobs:
 
   coveralls-finish:
     needs: coverage
+
     # Don't run on forks.
     if: github.repository_owner == 'php-parallel-lint' && needs.coverage.result == 'success'
-    runs-on: ubuntu-latest
+
     name: Coveralls Finish
+    runs-on: ubuntu-latest
+
     steps:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # v2.3.8
