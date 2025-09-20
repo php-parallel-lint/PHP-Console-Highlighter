@@ -44,10 +44,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: ${{ matrix.php }}
           ini-values: 'zend.assertions=1, error_reporting=-1, display_errors=On, display_startup_errors=On'
@@ -58,7 +58,7 @@ jobs:
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
       - name: Install Composer dependencies - normal
         if: ${{ matrix.experimental == false }}
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520" # 3.1.1
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
@@ -66,7 +66,7 @@ jobs:
       # For the PHP "nightly", we need to install with ignore platform reqs as not all dependencies allow it.
       - name: Install Composer dependencies - with ignore platform
         if: ${{ matrix.experimental == true }}
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520" # 3.1.1
         with:
           composer-options: --ignore-platform-reqs
           custom-cache-suffix: $(date -u "+%Y-%m")
@@ -99,7 +99,7 @@ jobs:
     name: "Coverage on PHP ${{ matrix.php }}"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup ini config
         id: set_ini
@@ -113,7 +113,7 @@ jobs:
           fi
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
         with:
           php-version: ${{ matrix.php }}
           ini-values: ${{ steps.set_ini.outputs.PHP_INI }}
@@ -126,7 +126,7 @@ jobs:
         run: composer remove --dev php-parallel-lint/php-code-style --no-update --no-interaction
 
       - name: Install Composer dependencies - normal
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520" # 3.1.1
         with:
           # Bust the cache at least once a month - output format: YYYY-MM.
           custom-cache-suffix: $(date -u "+%Y-%m")
@@ -148,7 +148,7 @@ jobs:
 
       - name: Upload coverage results to Coveralls
         if: ${{ success() }}
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
         with:
           format: clover
           file: build/logs/clover.xml
@@ -162,6 +162,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
         with:
           parallel-finished: true
