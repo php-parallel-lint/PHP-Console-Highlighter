@@ -160,6 +160,7 @@ jobs:
     # Don't run on forks.
     if: github.repository_owner == 'php-parallel-lint' && needs.coverage.result == 'success'
     runs-on: ubuntu-latest
+    name: Coveralls Finish
     steps:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@v2
