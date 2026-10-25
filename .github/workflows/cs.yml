@@ -12,8 +12,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   checkcs:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'Check code style'
     runs-on: ubuntu-latest
 
