@@ -33,11 +33,12 @@ jobs:
           - '8.2'
           - '8.3'
           - '8.4'
-          # PHP 8.5 is tested in coverage section
+          - '8.5'
+          # PHP 8.6 is tested in coverage section
         experimental: [false]
 
         include:
-          - php: '8.6'
+          - php: '8.7'
             experimental: true
 
     name: "Test on PHP ${{ matrix.php }}"
@@ -61,19 +62,12 @@ jobs:
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
-      - name: Install Composer dependencies - normal
-        if: ${{ matrix.experimental == false }}
+      - name: Install Composer dependencies
         uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
         with:
+          # For PHP "nightly", we need to install with ignore platform reqs as not all dependencies allow it.
+          composer-options: ${{ matrix.experimental == true && '--ignore-platform-req=php+' || '' }}
           # Bust the cache at least once a month - output format: YYYY-MM.
-          custom-cache-suffix: $(date -u "+%Y-%m")
-
-      # For the PHP "nightly", we need to install with ignore platform reqs as not all dependencies allow it.
-      - name: Install Composer dependencies - with ignore platform
-        if: ${{ matrix.experimental == true }}
-        uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
-        with:
-          composer-options: --ignore-platform-reqs
           custom-cache-suffix: $(date -u "+%Y-%m")
 
       - name: Lint
@@ -100,7 +94,7 @@ jobs:
       matrix:
         include:
           - php: 5.3
-          - php: 8.5
+          - php: 8.6
     name: "Coverage on PHP ${{ matrix.php }}"
     steps:
       - name: Checkout code
